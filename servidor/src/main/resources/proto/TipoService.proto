@@ -1,0 +1,15 @@
+syntax ="proto3";
+option java_multiple_files = true;
+package com.unla.servidor.server;
+
+message Tipo{
+    
+    long idTipo = 1;
+    String nombre = 2;
+    bool activo = 3; 
+
+}
+
+service TipoService{
+    rpc AltaTipo (Tipo) returns (Tipo);
+}
