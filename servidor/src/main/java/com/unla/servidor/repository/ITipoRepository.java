@@ -1,5 +1,4 @@
 package com.unla.servidor.repository;
-
 import com.unla.servidor.entities.Tipo;
 import java.io.Serializable;
 

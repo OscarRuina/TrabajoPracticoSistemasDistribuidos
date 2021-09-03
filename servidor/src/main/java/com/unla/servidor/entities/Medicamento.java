@@ -1,5 +1,4 @@
 package com.unla.servidor.entities;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -86,7 +85,5 @@ public class Medicamento {
         return "Medicamento [codigo=" + codigo + ", droga=" + droga + ", idMedicamento=" + idMedicamento
                 + ", nombreComercial=" + nombreComercial + ", tipo=" + tipo.getNombre() + "]";
     }
-
-    
     
 }

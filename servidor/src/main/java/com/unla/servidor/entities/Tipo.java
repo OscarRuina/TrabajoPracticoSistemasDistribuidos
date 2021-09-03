@@ -1,5 +1,4 @@
 package com.unla.servidor.entities;
-
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tipo")
 public class Tipo {
-    
+
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idTipo")
@@ -65,5 +64,5 @@ public class Tipo {
     public String toString() {
         return "Tipo [activo=" + activo + ", idTipo=" + idTipo + ", nombre=" + nombre + "]";
     }
-
+    
 }
