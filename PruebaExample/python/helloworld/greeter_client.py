@@ -20,8 +20,10 @@ def home():
 	arrMedicamentos = [ ]
 	arrTipos = [ ]
 	arrProductos = [ ]
+	Producto = helloworld_pb2.Producto()
 	with grpc.insecure_channel('localhost:50051') as channel: 
 			stub = helloworld_pb2_grpc.GreeterStub(channel)
+
 			TipoList = stub.ListaTipo(helloworld_pb2.Tipo())
 			print(TipoList)
 			for i in range(0,len(TipoList.Tipos)):
@@ -42,9 +44,10 @@ def home():
 			ProductoList = stub.ListaProducto(helloworld_pb2.Producto())
 			print(ProductoList)
 			for i in range(0,len(ProductoList.Productos)):
+				Producto = stub.ValidarProducto(ProductoList.Productos[i])
 				Id_producto = ProductoList.Productos[i].Id_producto
 				Codigo = ProductoList.Productos[i].Codigo
-				arrProductos.append([Id_producto, Codigo])
+				arrProductos.append([Id_producto, Codigo, Producto.Prioritario, Producto.Verificar])
 
 			print('arr Productos: ', arrProductos)
 			print('arr medicamentos: ', arrMedicamentos)
@@ -96,6 +99,8 @@ def deleteTipo(id):
 def BuscarMedicamentoId():
 	arrMedicamentos = [ ]
 	arrTipos = [ ]
+	arrProductos = [ ]
+
 	if request.method == 'POST':
 		NombreFiltro = request.form['NombreFiltro']
 		with grpc.insecure_channel('localhost:50051') as channel:
@@ -121,13 +126,23 @@ def BuscarMedicamentoId():
 				Nombre = TipoList.Tipos[i].Nombre
 				arrTipos.append([Id_tipo, Activo, Nombre])
 
-		return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos)
+			ProductoList = stub.ListaProducto(helloworld_pb2.Producto())
+			print(ProductoList)
+			for i in range(0,len(ProductoList.Productos)):
+				Producto = stub.ValidarProducto(ProductoList.Productos[i])
+				Id_producto = ProductoList.Productos[i].Id_producto
+				Codigo = ProductoList.Productos[i].Codigo
+				arrProductos.append([Id_producto, Codigo, Producto.Prioritario, Producto.Verificar])
+
+			print('arr Productos: ', arrProductos)
+		return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos, Productos = arrProductos)
 
 
 @app.route('/BuscarMedicamentoNombre', methods=['POST'])
 def BuscarMedicamentoNombre():
 	arrMedicamentos = [ ]
 	arrTipos = [ ]
+	arrProductos = [ ]
 
 	if request.method == 'POST':
 		Comercial = request.form['NomComercial']
@@ -151,7 +166,15 @@ def BuscarMedicamentoNombre():
 				Nombre = TipoList.Tipos[i].Nombre
 				arrTipos.append([Id_tipo, Activo, Nombre])
 
-		return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos)
+			ProductoList = stub.ListaProducto(helloworld_pb2.Producto())
+			print(ProductoList)
+			for i in range(0,len(ProductoList.Productos)):
+				Producto = stub.ValidarProducto(ProductoList.Productos[i])
+				Id_producto = ProductoList.Productos[i].Id_producto
+				Codigo = ProductoList.Productos[i].Codigo
+				arrProductos.append([Id_producto, Codigo, Producto.Prioritario, Producto.Verificar])
+
+		return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos, Productos = arrProductos)
 
 
 def start():

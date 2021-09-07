@@ -36,7 +36,7 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
  */
 function sayHello(call, callback) {
   var codigo = 'W'
-  respondio = esPrioritario('DCR-88578-9')
+  respondio = esPrioritario('PCR-88578-9')
   console.log(respondio)
   respondio = verificar('DCR-88578-9')
   console.log(respondio)
@@ -95,52 +95,6 @@ function AltaMedicamento(call, callback) {
   callback(null, {message: 'Recibido'});
 }
 
-function esPrioritario(codigo){
-  console.log('esPrioritario: ', codigo)
-  var prioritario = false;
-  //primer letra del codigo
-  var digito = codigo.substring(0, 1);
-  if(digito.toUpperCase == "P" || digito.toUpperCase == "W"){
-      prioritario = true;
-  }
-  return(prioritario);
-}
-
-function verificar(codigo){
-  var suma = 0;
-  var suma2 = 0;
-  verificado = false;
-  //separo el codigo por " - " ejemplo: DCR-88578-9:
-  var arr = []
-  var ver = []
-  arr = codigo.split("-");
-
-  var num = 'a'
-  var num2 = 'a'
-
-  num = arr[1];
-  ver = arr[2];
-
-  numst = num.toString()
-  //sumo los numeros
-
-  for( i = 0; i < numst.length; i++){
-      suma = suma + parseInt(numst.charAt(i))
-      //suma = suma + parseInt(numst.substring(i, i+1),10);
-  }
-
-  //si suma mayor a dos digitos vuelvo a sumar
-  num2 = suma.toString();
-  for( j = 0; j < num2.length; j++){
-      suma2 = suma2 + parseInt(num2.substring(j, j+1),10);
-  }
-
-  if(suma2 == parseInt(ver)){
-      verificado = true;
-  }
-  return verificado;
-}
-
 /*
   `Numero` varchar(50),
   `Comercial` varchar(50),
@@ -150,7 +104,6 @@ function verificar(codigo){
   //var Comercial = results[i].nombre;
   //var Descripcion = results[i].descripcion;
 */
-
 
 //`Id_tipo` BIGINT(20) NOT NULL AUTO_INCREMENT,
 //`Activo` BIT(1) NULL DEFAULT NULL,
@@ -212,6 +165,59 @@ function EliminarTipo(call, callback) {
   })
 }
 
+function ValidarProducto(call, callback) {
+  var prioritario = esPrioritario(call.request.Codigo)
+  var verifica = verificar(call.request.Codigo)
+  call.request.Prioritario = prioritario
+  call.request.Verificar = verifica
+  console.log('validar producto: ', call.request)
+  callback(null, call.request);
+}
+
+function esPrioritario(codigo){
+  var prioritario = false;
+  //primer letra del codigo
+  var digito = codigo.substring(0, 1);
+  if(digito.toUpperCase() === "P" || digito.toUpperCase() === "W"){
+      prioritario = true;
+  }
+  return(prioritario);
+}
+
+function verificar(codigo){
+  var suma = 0;
+  var suma2 = 0;
+  verificado = false;
+  //separo el codigo por " - " ejemplo: DCR-88578-9:
+  var arr = []
+  var ver = []
+  arr = codigo.split("-");
+
+  var num = 'a'
+  var num2 = 'a'
+
+  num = arr[1];
+  ver = arr[2];
+
+  numst = num.toString()
+  //sumo los numeros
+
+  for( i = 0; i < numst.length; i++){
+      suma = suma + parseInt(numst.charAt(i))
+      //suma = suma + parseInt(numst.substring(i, i+1),10);
+  }
+
+  //si suma mayor a dos digitos vuelvo a sumar
+  num2 = suma.toString();
+  for( j = 0; j < num2.length; j++){
+      suma2 = suma2 + parseInt(num2.substring(j, j+1),10);
+  }
+
+  if(suma2 == parseInt(ver)){
+      verificado = true;
+  }
+  return verificado;
+}
 /**
 Arranque del GRPC
 **/
@@ -225,7 +231,8 @@ function main() {
               ListaTipo: ListaTipo,
                 BuscarMedicamentoId: BuscarMedicamentoId,
                   BuscarMedicamentoNombre: BuscarMedicamentoNombre,
-                    ListaProducto: ListaProducto});
+                    ListaProducto: ListaProducto,
+                      ValidarProducto: ValidarProducto});
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });

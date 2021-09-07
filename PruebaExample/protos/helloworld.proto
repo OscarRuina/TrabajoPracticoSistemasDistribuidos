@@ -18,7 +18,8 @@ service Greeter {
   rpc ListaTipo (Tipo) returns (TipoList) {}                        //Ok
   rpc BuscarMedicamentoId (Tipo) returns (DatosList) {}             //OK
   rpc BuscarMedicamentoNombre (Medicamento) returns (DatosList) {}  //Ok
-  rpc ListaProducto (Producto) returns (ProductoList) {}
+  rpc ListaProducto (Producto) returns (ProductoList) {}            //Ok
+  rpc ValidarProducto (Producto) returns (Producto) {}
 }
 
 message Empty {}
@@ -51,6 +52,8 @@ message Tipo {
 message Producto {
   int32  Id_producto = 1;
   string Codigo = 2;
+  bool   Prioritario = 3;
+  bool   Verificar = 4;
 }
 
 message DatosList {

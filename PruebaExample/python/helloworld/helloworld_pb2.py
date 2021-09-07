@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\033io.grpc.examples.helloworldB\017HelloWorldProtoP\001\242\002\003HLW',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10helloworld.proto\x12\nhelloworld\"\x07\n\x05\x45mpty\"\x1c\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"~\n\x0bMedicamento\x12\x16\n\x0eId_medicamento\x18\x01 \x01(\x05\x12\x0e\n\x06Numero\x18\x02 \x01(\t\x12\x11\n\tComercial\x18\x03 \x01(\t\x12\x13\n\x0b\x44\x65scripcion\x18\x04 \x01(\t\x12\x0f\n\x07Id_tipo\x18\x05 \x01(\x05\x12\x0e\n\x06Nombre\x18\x06 \x01(\t\"7\n\x04Tipo\x12\x0f\n\x07Id_tipo\x18\x01 \x01(\x05\x12\x0e\n\x06\x41\x63tivo\x18\x02 \x01(\x05\x12\x0e\n\x06Nombre\x18\x03 \x01(\t\"/\n\x08Producto\x12\x13\n\x0bId_producto\x18\x01 \x01(\x05\x12\x0e\n\x06\x43odigo\x18\x02 \x01(\t\"3\n\tDatosList\x12&\n\x05\x44\x61tos\x18\x01 \x03(\x0b\x32\x17.helloworld.Medicamento\"+\n\x08TipoList\x12\x1f\n\x05Tipos\x18\x01 \x03(\x0b\x32\x10.helloworld.Tipo\"7\n\x0cProductoList\x12\'\n\tProductos\x18\x01 \x03(\x0b\x32\x14.helloworld.Producto2\xd2\x04\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x12\x44\n\x10ListaMedicamento\x12\x17.helloworld.Medicamento\x1a\x15.helloworld.DatosList\"\x00\x12\x44\n\x0f\x41ltaMedicamento\x12\x17.helloworld.Medicamento\x1a\x16.helloworld.HelloReply\"\x00\x12\x36\n\x08\x41ltaTipo\x12\x10.helloworld.Tipo\x1a\x16.helloworld.HelloReply\"\x00\x12:\n\x0c\x45liminarTipo\x12\x10.helloworld.Tipo\x1a\x16.helloworld.HelloReply\"\x00\x12\x35\n\tListaTipo\x12\x10.helloworld.Tipo\x1a\x14.helloworld.TipoList\"\x00\x12@\n\x13\x42uscarMedicamentoId\x12\x10.helloworld.Tipo\x1a\x15.helloworld.DatosList\"\x00\x12K\n\x17\x42uscarMedicamentoNombre\x12\x17.helloworld.Medicamento\x1a\x15.helloworld.DatosList\"\x00\x12\x41\n\rListaProducto\x12\x14.helloworld.Producto\x1a\x18.helloworld.ProductoList\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3'
+  serialized_pb=b'\n\x10helloworld.proto\x12\nhelloworld\"\x07\n\x05\x45mpty\"\x1c\n\x0cHelloRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x1d\n\nHelloReply\x12\x0f\n\x07message\x18\x01 \x01(\t\"~\n\x0bMedicamento\x12\x16\n\x0eId_medicamento\x18\x01 \x01(\x05\x12\x0e\n\x06Numero\x18\x02 \x01(\t\x12\x11\n\tComercial\x18\x03 \x01(\t\x12\x13\n\x0b\x44\x65scripcion\x18\x04 \x01(\t\x12\x0f\n\x07Id_tipo\x18\x05 \x01(\x05\x12\x0e\n\x06Nombre\x18\x06 \x01(\t\"7\n\x04Tipo\x12\x0f\n\x07Id_tipo\x18\x01 \x01(\x05\x12\x0e\n\x06\x41\x63tivo\x18\x02 \x01(\x05\x12\x0e\n\x06Nombre\x18\x03 \x01(\t\"W\n\x08Producto\x12\x13\n\x0bId_producto\x18\x01 \x01(\x05\x12\x0e\n\x06\x43odigo\x18\x02 \x01(\t\x12\x13\n\x0bPrioritario\x18\x03 \x01(\x08\x12\x11\n\tVerificar\x18\x04 \x01(\x08\"3\n\tDatosList\x12&\n\x05\x44\x61tos\x18\x01 \x03(\x0b\x32\x17.helloworld.Medicamento\"+\n\x08TipoList\x12\x1f\n\x05Tipos\x18\x01 \x03(\x0b\x32\x10.helloworld.Tipo\"7\n\x0cProductoList\x12\'\n\tProductos\x18\x01 \x03(\x0b\x32\x14.helloworld.Producto2\x93\x05\n\x07Greeter\x12>\n\x08SayHello\x12\x18.helloworld.HelloRequest\x1a\x16.helloworld.HelloReply\"\x00\x12\x44\n\x10ListaMedicamento\x12\x17.helloworld.Medicamento\x1a\x15.helloworld.DatosList\"\x00\x12\x44\n\x0f\x41ltaMedicamento\x12\x17.helloworld.Medicamento\x1a\x16.helloworld.HelloReply\"\x00\x12\x36\n\x08\x41ltaTipo\x12\x10.helloworld.Tipo\x1a\x16.helloworld.HelloReply\"\x00\x12:\n\x0c\x45liminarTipo\x12\x10.helloworld.Tipo\x1a\x16.helloworld.HelloReply\"\x00\x12\x35\n\tListaTipo\x12\x10.helloworld.Tipo\x1a\x14.helloworld.TipoList\"\x00\x12@\n\x13\x42uscarMedicamentoId\x12\x10.helloworld.Tipo\x1a\x15.helloworld.DatosList\"\x00\x12K\n\x17\x42uscarMedicamentoNombre\x12\x17.helloworld.Medicamento\x1a\x15.helloworld.DatosList\"\x00\x12\x41\n\rListaProducto\x12\x14.helloworld.Producto\x1a\x18.helloworld.ProductoList\"\x00\x12?\n\x0fValidarProducto\x12\x14.helloworld.Producto\x1a\x14.helloworld.Producto\"\x00\x42\x36\n\x1bio.grpc.examples.helloworldB\x0fHelloWorldProtoP\x01\xa2\x02\x03HLWb\x06proto3'
 )
 
 
@@ -249,6 +249,20 @@ _PRODUCTO = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='Prioritario', full_name='helloworld.Producto.Prioritario', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='Verificar', full_name='helloworld.Producto.Verificar', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -262,7 +276,7 @@ _PRODUCTO = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=287,
-  serialized_end=334,
+  serialized_end=374,
 )
 
 
@@ -293,8 +307,8 @@ _DATOSLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=336,
-  serialized_end=387,
+  serialized_start=376,
+  serialized_end=427,
 )
 
 
@@ -325,8 +339,8 @@ _TIPOLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=389,
-  serialized_end=432,
+  serialized_start=429,
+  serialized_end=472,
 )
 
 
@@ -357,8 +371,8 @@ _PRODUCTOLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=434,
-  serialized_end=489,
+  serialized_start=474,
+  serialized_end=529,
 )
 
 _DATOSLIST.fields_by_name['Datos'].message_type = _MEDICAMENTO
@@ -448,8 +462,8 @@ _GREETER = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=492,
-  serialized_end=1086,
+  serialized_start=532,
+  serialized_end=1191,
   methods=[
   _descriptor.MethodDescriptor(
     name='SayHello',
@@ -538,6 +552,16 @@ _GREETER = _descriptor.ServiceDescriptor(
     containing_service=None,
     input_type=_PRODUCTO,
     output_type=_PRODUCTOLIST,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='ValidarProducto',
+    full_name='helloworld.Greeter.ValidarProducto',
+    index=9,
+    containing_service=None,
+    input_type=_PRODUCTO,
+    output_type=_PRODUCTO,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
