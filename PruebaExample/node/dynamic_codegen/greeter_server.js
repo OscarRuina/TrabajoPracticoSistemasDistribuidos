@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const mysql = require('mysql');
 const morgan = require('morgan');
 //const myConnection = require('express-myconnection');
@@ -36,6 +35,11 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld;
  * Implements the SayHello RPC method.
  */
 function sayHello(call, callback) {
+  var codigo = 'W'
+  respondio = esPrioritario('DCR-88578-9')
+  console.log(respondio)
+  respondio = verificar('DCR-88578-9')
+  console.log(respondio)
   callback(null, {message: 'desde el server Hola, ' + call.request.name});
   console.log(call.request.name);
 }
@@ -45,24 +49,72 @@ function AltaMedicamento(call, callback) {
   var Comercial = call.request.Comercial;
   var Descripcion = call.request.Descripcion;
   var Tipo = call.request.Nombre;
+  var validar = 1
 
-    var query = connection.query('select Id_medicamento from medicamentos a order by Id_medicamento desc limit 1', function (error, results, fields) {
-      if (error) throw error;
-      contador = results[0].Id_medicamento
-      contador = contador + 1
-      console.log('Contador medicamentos: ', contador)
+  var query = connection.query('select Id_medicamento from medicamentos a order by Id_medicamento desc limit 1', function (error, results, fields) {
+    if (error) throw error;
+    contador = results[0].Id_medicamento
+    contador = contador + 1
+    console.log('Contador medicamentos: ', contador)
 
-      var query = connection.query('select Id_tipo from tipo where Nombre = ?', [Tipo] ,function (error, results, fields) {
-        var Id_tipo = results[0].Id_tipo
+    var query = connection.query('select Id_tipo from tipo where Nombre = ?', [Tipo] ,function (error, results, fields) {
+      var Id_tipo = results[0].Id_tipo
 
-        var datos = {Id_medicamento: contador, Numero : Numero, Comercial : Comercial, Descripcion : Descripcion, Id_tipo : Id_tipo };
-        var query = connection.query('INSERT INTO medicamentos SET ?', datos, function (error, results, fields) {
-          if (error) throw error;
-        });
+      var datos = {Id_medicamento: contador, Numero : Numero, Comercial : Comercial, Descripcion : Descripcion, Id_tipo : Id_tipo };
+      var query = connection.query('INSERT INTO medicamentos SET ?', datos, function (error, results, fields) {
+        if (error) throw error;
       });
     });
+  });
   callback(null, {message: 'Recibido'});
 }
+
+function esPrioritario(codigo){
+  console.log('esPrioritario: ', codigo)
+  var prioritario = false;
+  //primer letra del codigo
+  var digito = codigo.substring(0, 1);
+  if(digito.toUpperCase == "P" || digito.toUpperCase == "W"){
+      prioritario = true;
+  }
+  return(prioritario);
+}
+
+function verificar(codigo){
+  var suma = 0;
+  var suma2 = 0;
+  verificado = false;
+  //separo el codigo por " - " ejemplo: DCR-88578-9:
+  var arr = []
+  var ver = []
+  arr = codigo.split("-");
+
+  var num = 'a'
+  var num2 = 'a'
+
+  num = arr[1];
+  ver = arr[2];
+
+  numst = num.toString()
+  //sumo los numeros
+
+  for( i = 0; i < numst.length; i++){
+      suma = suma + parseInt(numst.charAt(i))
+      //suma = suma + parseInt(numst.substring(i, i+1),10);
+  }
+
+  //si suma mayor a dos digitos vuelvo a sumar
+  num2 = suma.toString();
+  for( j = 0; j < num2.length; j++){
+      suma2 = suma2 + parseInt(num2.substring(j, j+1),10);
+  }
+
+  if(suma2 == parseInt(ver)){
+      verificado = true;
+  }
+  return verificado;
+}
+
 /*
   `Numero` varchar(50),
   `Comercial` varchar(50),
@@ -105,6 +157,7 @@ function AltaTipo(call, callback) {
 }
 
 function ListaTipo(call, callback) {
+  //connection.query('SELECT * FROM tipo where Activo = 1', function (error, results, fields) {
   connection.query('SELECT * FROM tipo', function (error, results, fields) {
     if (error) throw error;
     console.log(results)
@@ -138,15 +191,24 @@ function BuscarMedicamentoNombre(call, callback) {
     callback(null, {Datos: results});
   })
 }
-
+//UPDATE tipo SET Activo = 0 WHERE Id_tipo = ?;
 function EliminarTipo(call, callback) {
   var Id_tipo = call.request.Id_tipo
-  connection.query('DELETE FROM tipo WHERE Id_tipo = ?', [Id_tipo] , function (error, results, fields) {
+  connection.query('UPDATE tipo SET Activo = 0 WHERE Id_tipo = ?', [Id_tipo] , function (error, results, fields) {
     if (error) throw error;
     console.log(results)
     callback(null, {message: 'Registro Eliminado'});
   })
 }
+
+function ListaProducto(call, callback) {
+  connection.query('SELECT * FROM producto', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results)
+    callback(null, {Tipos: results});
+  })
+}
+
 /**
 Arranque del GRPC
 **/
@@ -159,7 +221,8 @@ function main() {
             EliminarTipo: EliminarTipo,
               ListaTipo: ListaTipo,
                 BuscarMedicamentoId: BuscarMedicamentoId,
-                  BuscarMedicamentoNombre: BuscarMedicamentoNombre});
+                  BuscarMedicamentoNombre: BuscarMedicamentoNombre,
+                    ListaProducto: ListaProducto});
   server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), () => {
     server.start();
   });

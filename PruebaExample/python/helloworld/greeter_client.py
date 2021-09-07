@@ -11,7 +11,7 @@ import helloworld_pb2
 import helloworld_pb2_grpc
 import numpy
 
-from helloworld_pb2 import DatosList, Medicamento, TipoList, Tipo
+from helloworld_pb2 import DatosList, Medicamento, TipoList, Tipo, Producto, ProductoList
 
 app = Flask(__name__)
 
@@ -19,6 +19,7 @@ app = Flask(__name__)
 def home():
 	arrMedicamentos = [ ]
 	arrTipos = [ ]
+	arrProductos = [ ]
 	with grpc.insecure_channel('localhost:50051') as channel: 
 			stub = helloworld_pb2_grpc.GreeterStub(channel)
 			TipoList = stub.ListaTipo(helloworld_pb2.Tipo())
@@ -37,7 +38,16 @@ def home():
 				descripcion = DatosList.Datos[i].Descripcion
 				tipo = DatosList.Datos[i].Nombre
 				arrMedicamentos.append([codigo, comercial, descripcion, tipo])
+			
+			ProductoList = stub.ListaProducto(helloworld_pb2.Producto())
+			print(ProductoList)
+			for i in range(0,len(ProductoList.Productos)):
+				Id_producto = ProductoList.Productos[i].Id_producto
+				Codigo = ProductoList.Productos[i].Codigo
 
+				arrProductos.append([Id_producto, Codigo])
+
+			print('arr Productos: ', arrProductos)
 			print('arr medicamentos: ', arrMedicamentos)
 			print('arr tipos: ', arrTipos)
 			return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos)
@@ -156,5 +166,5 @@ def start():
 
 if __name__ == '__main__':
 	logging.basicConfig()
-	#start()
+	start()
 	app.run()
