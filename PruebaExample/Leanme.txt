@@ -1,0 +1,31 @@
+instalar python https://www.python.org/
+
+en la instalacion palomeen la configuracion de path para que detecte la variable por cmd
+
+en un cmd hacen 
+python --version 
+
+pip --version para ver si se instalo bien
+
+pip install flask para abrir el server
+
+en la carpeta donde esta el index.py
+python index.py para ejectutar el server
+
+Para compilar protos
+pip install grpcio-tools
+python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/servicio.proto
+
+
+
+python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/helloworld.proto
+
+para nodejs hay que instalarselo
+
+en la carpeta del archivo index de PruebaExample\node
+darle npm install - si es necesario
+node greeter_server.js para arrancar el server
+
+python greeter_client.py para arrancar el cliente
+
+https://www.youtube.com/watch?v=IgCfZkR8wME

@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+option objc_class_prefix = "HLW";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}               //Ok
+  rpc ListaMedicamento(Medicamento) returns (DatosList) {}          //Ok
+  rpc AltaMedicamento (Medicamento) returns (HelloReply) {}         //Ok
+  rpc AltaTipo (Tipo) returns (HelloReply) {}                       //Ok
+  rpc EliminarTipo(Tipo) returns (HelloReply) {}                    //Ok
+  rpc ListaTipo (Tipo) returns (TipoList) {}                        //Ok
+  rpc BuscarMedicamentoId (Tipo) returns (DatosList) {}             //OK
+  rpc BuscarMedicamentoNombre (Medicamento) returns (DatosList) {}  //Ok
+}
+
+message Empty {}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+
+message Medicamento {
+  int32  Id_medicamento = 1;
+  string Numero = 2;
+  string Comercial = 3;
+  string Descripcion = 4;
+  int32  Id_tipo = 5;
+  string Nombre = 6;
+}
+
+message Tipo {
+  int32  Id_tipo = 1;
+  int32  Activo = 2;
+  string Nombre = 3;
+}
+
+message DatosList {
+  repeated Medicamento Datos = 1;
+}
+
+message TipoList {
+  repeated Tipo Tipos = 1;
+}
+

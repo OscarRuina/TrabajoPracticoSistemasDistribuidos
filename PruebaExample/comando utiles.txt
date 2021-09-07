@@ -1,0 +1,6 @@
+para compilar los protos
+python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/helloworld.proto
+
+
+para el mysql en nodejs
+https://www.npmjs.com/package/mysql/v/2.18.1

@@ -1,0 +1,94 @@
+{% extends "salida.html" %}
+
+{% block content %}
+<!--
+<div class="container">
+	<header class="row">
+			<img src="{{ url_for('static', filename='img/delivery.png') }}" alt="Logo" class="animated bounceIn">
+	</header>
+</div>
+-->
+<h2 class="text_center">Alta de Tipos</h2>
+<form action="/AddTipo" method="POST">
+	<input type="text" name="Activo" placeholder="Tipo Activo">
+	<input type="text" name="Nombre" placeholder="Nombre del tipo de medicamentos">
+	<button type="submit"> guardar </button>
+</form>
+<br>
+<h2 class="text_center">Lista Tipos</h2>
+<br>
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Activo</th>
+        <th>Nombre Tipo</th>
+        <th>Accion</th>
+      </tr>
+
+      <tbody>
+        {% for Tipo in Tipos %} 
+          <tr>
+            <td> {{ Tipo.1 }} </td>
+            <td> {{ Tipo.2 }} </td>
+            <td>
+              <a href="/deleteTipo/{{Tipo.0}}" class="btn btn-danger">Eliminar</a>
+              <!--<a href="/editTipo/{{Tipo.0}}" class="btn btn-danger">Eliminar</a>-->
+            </td>
+          </tr>
+        {% endfor %} 
+      </tbody>
+    </thead>
+  </table>
+</div>
+<br>
+
+<h2 class="text_center">Alta de medicamentos</h2>
+<form action="/AddMedicamento" method="POST">
+	<input type="text" name="codigo" placeholder="Codigo Numerico">
+	<input type="text" name="comercial" placeholder="Nombre Comercial">
+	<input type="text" name="descripcion" placeholder="Descripcion">
+	<input type="text" name="tipo" placeholder="Tipo">
+	<button type="submit"> guardar </button>
+</form>
+
+<br>
+<br>
+<h2 class="text_center">Listado de medicamentos</h2>
+<br>
+<h2 class="text_center">Fitros</h2>
+<form action="/BuscarMedicamentoId" method="POST">
+	<input type="text" name="NombreFiltro" placeholder="Nombre Tipo">
+	<button type="submit"> guardar </button>
+</form>
+
+<form action="/BuscarMedicamentoNombre" method="POST">
+	<input type="text" name="NomComercial" placeholder="Nombre Comercial">
+	<button type="submit"> guardar </button>
+</form>
+
+<br>
+<div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>n*</th>
+          <th>Nombre Comercial</th>
+          <th>Descripcion</th>
+          <th>Tipo</th>
+        </tr>
+
+        <tbody>
+          {% for Medicamento in Medicamentos %} 
+            <tr>
+              <td> {{ Medicamento.0 }} </td>
+              <td> {{ Medicamento.1 }} </td>
+              <td> {{ Medicamento.2 }} </td>
+              <td> {{ Medicamento.3 }} </td>
+            </tr>
+          {% endfor %} 
+        </tbody>
+      </thead>
+  	</table>
+</div>
+{% endblock %}

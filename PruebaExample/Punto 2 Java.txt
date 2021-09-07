@@ -1,0 +1,40 @@
+public class App {
+    public static void main(String[] args) throws Exception {
+        System.out.println("Prioritario: DCR-88578-9: " + esPrioritario("DCR-88578-9"));
+        System.out.println("Verificado: DCR-88578-9: " + verificar("DCR-88578-9"));
+    }
+
+    //Punto 2 a) true si codigo empieza con P o W
+    public static boolean esPrioritario(String codigo){
+        boolean prioritario = false;
+        //primer letra del codigo
+        String digito = codigo.substring(0, 1);
+        if(digito.equalsIgnoreCase("P") || digito.equalsIgnoreCase("W")){
+            prioritario = true;
+        }
+        return prioritario;
+    }
+    //Punto 2 b) true si ultimo digito es igual a la suma del codigo numerico
+    public static boolean verificar(String codigo){
+        int suma = 0;
+        int suma2 = 0;
+        boolean verificado = false;
+        //separo el codigo por " - "
+        String[] arr = codigo.split("-");
+        String num = arr[1];
+        String ver = arr[2];
+        //sumo los numeros
+        for(int i = 0; i < num.length(); i++){
+            suma+= Integer.parseInt(num.substring(i, i+1));
+        }
+        //si suma mayor a dos digitos vuelvo a sumar
+        String num2 = Integer.toString(suma);
+        for(int j = 0; j < num2.length(); j++){
+            suma2+= Integer.parseInt(num2.substring(j, j+1));
+        }
+        if(suma2 == Integer.parseInt(ver)){
+            verificado = true;
+        }
+        return verificado;
+    }
+}
