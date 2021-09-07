@@ -44,6 +44,32 @@ function sayHello(call, callback) {
   console.log(call.request.name);
 }
 
+function ListaMedicamento(call, callback) {
+  connection.query('select a.Id_medicamento, a.Numero, a.Comercial, a.Descripcion, a.Id_tipo, b.Nombre from medicamentos a inner join tipo b ON a.id_tipo = b.Id_tipo',
+  function (error, results, fields) {
+    if (error) throw error;
+    console.log(results)
+    callback(null, {Datos: results});
+  })
+}
+
+function ListaTipo(call, callback) {
+  //connection.query('SELECT * FROM tipo where Activo = 1', function (error, results, fields) {
+  connection.query('SELECT * FROM tipo', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results)
+    callback(null, {Tipos: results});
+  })
+}
+
+function ListaProducto(call, callback) {
+  connection.query('SELECT * FROM producto', function (error, results, fields) {
+    if (error) throw error;
+    console.log(results)
+    callback(null, {Productos: results});
+  })
+}
+
 function AltaMedicamento(call, callback) {
   var Numero = call.request.Numero;
   var Comercial = call.request.Comercial;
@@ -124,14 +150,7 @@ function verificar(codigo){
   //var Comercial = results[i].nombre;
   //var Descripcion = results[i].descripcion;
 */
-function ListaMedicamento(call, callback) {
-  connection.query('select a.Id_medicamento, a.Numero, a.Comercial, a.Descripcion, a.Id_tipo, b.Nombre from medicamentos a inner join tipo b ON a.id_tipo = b.Id_tipo',
-  function (error, results, fields) {
-    if (error) throw error;
-    console.log(results)
-    callback(null, {Datos: results});
-  })
-}
+
 
 //`Id_tipo` BIGINT(20) NOT NULL AUTO_INCREMENT,
 //`Activo` BIT(1) NULL DEFAULT NULL,
@@ -156,14 +175,6 @@ function AltaTipo(call, callback) {
   callback(null, {message: 'Recibido'});
 }
 
-function ListaTipo(call, callback) {
-  //connection.query('SELECT * FROM tipo where Activo = 1', function (error, results, fields) {
-  connection.query('SELECT * FROM tipo', function (error, results, fields) {
-    if (error) throw error;
-    console.log(results)
-    callback(null, {Tipos: results});
-  })
-}
                             //tipo, DatosList
 function BuscarMedicamentoId(call, callback) {
   var nombreTipo = call.request.Nombre
@@ -198,14 +209,6 @@ function EliminarTipo(call, callback) {
     if (error) throw error;
     console.log(results)
     callback(null, {message: 'Registro Eliminado'});
-  })
-}
-
-function ListaProducto(call, callback) {
-  connection.query('SELECT * FROM producto', function (error, results, fields) {
-    if (error) throw error;
-    console.log(results)
-    callback(null, {Tipos: results});
   })
 }
 

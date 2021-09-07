@@ -38,19 +38,18 @@ def home():
 				descripcion = DatosList.Datos[i].Descripcion
 				tipo = DatosList.Datos[i].Nombre
 				arrMedicamentos.append([codigo, comercial, descripcion, tipo])
-			
+
 			ProductoList = stub.ListaProducto(helloworld_pb2.Producto())
 			print(ProductoList)
 			for i in range(0,len(ProductoList.Productos)):
 				Id_producto = ProductoList.Productos[i].Id_producto
 				Codigo = ProductoList.Productos[i].Codigo
-
 				arrProductos.append([Id_producto, Codigo])
 
 			print('arr Productos: ', arrProductos)
 			print('arr medicamentos: ', arrMedicamentos)
 			print('arr tipos: ', arrTipos)
-			return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos)
+			return render_template('home.html', Medicamentos = arrMedicamentos, Tipos = arrTipos, Productos = arrProductos)
 
 
 @app.route('/AddMedicamento', methods=['POST'])

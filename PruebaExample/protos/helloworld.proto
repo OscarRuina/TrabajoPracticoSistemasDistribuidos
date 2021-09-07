@@ -51,8 +51,6 @@ message Tipo {
 message Producto {
   int32  Id_producto = 1;
   string Codigo = 2;
-  //bool   EsPrioritario = 3;
-  //bool   Verificar = 4;
 }
 
 message DatosList {
