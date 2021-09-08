@@ -77,9 +77,9 @@ function AltaMedicamento(call, callback) {
   var Tipo = call.request.Nombre;
   var validar = 1
 
-  var query = connection.query('select Id_medicamento from medicamentos a order by Id_medicamento desc limit 1', function (error, results, fields) {
+  var query = connection.query('select COUNT(*) as count from medicamentos', function (error, results, fields) {
     if (error) throw error;
-    contador = results[0].Id_medicamento
+    contador = results[0].count
     contador = contador + 1
     console.log('Contador medicamentos: ', contador)
 
@@ -113,9 +113,9 @@ function AltaTipo(call, callback) {
   var Activo = call.request.Activo;
   var Nombre = call.request.Nombre;
 
-    var query = connection.query('select Id_tipo from tipo a order by Id_tipo desc limit 1', function (error, results, fields) {
+    var query = connection.query('select COUNT(*) as count from tipo', function (error, results, fields) {
       if (error) throw error;
-      contador = results[0].Id_tipo
+      contador = results[0].count
       contador = contador + 1
       console.log('Contador Tipo: ', contador)
 

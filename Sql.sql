@@ -52,3 +52,12 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 insert into producto values (4,'ABC-1111-9');
+
+select * from producto;
+
+drop table producto;
+drop table medicamentos;
+drop table tipo;
+
+insert into producto(Codigo) values
+ ('DCR-88578-9'),('PAS-11111-5'),('OCR-55565-7'),('PAQ-88697-4'),('WNA-25713-8');
